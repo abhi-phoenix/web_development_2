@@ -1,0 +1,37 @@
+<html>
+ <head>
+  <link rel="stylesheet" href="completion_page.css">
+  <title>Study Complete</title>
+ </head>
+ <body>
+<div id="outer_div">
+
+<h1>Thank You !!</h1>
+<p>You have successfully completed the study.</p>
+<p>Please use the below mentioned code to claim your compensation.</p>
+
+
+  
+  
+  <div id = "para1"> 
+	<p> 
+    <h1>Completion Code: </h1>   
+    <% if (message !=''){ %>
+       <input class = "inputClass" id = "myInput" value = <%= message %>>
+    <% }  %>
+      <button onclick="myFunction()">Copy Code</button>
+  </p>
+  </div>  
+
+  </div>
+
+  <script>
+    function myFunction() {
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); 
+  document.execCommand("copy");
+    }
+  </script>
+ </body>
+</html>

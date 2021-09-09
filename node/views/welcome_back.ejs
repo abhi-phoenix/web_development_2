@@ -1,0 +1,31 @@
+<html>
+ <head>
+ <link rel="stylesheet" href="welcome_back.css">
+  <title>Welcome back</title>
+ </head>
+ <body>
+ <div id="outer_div">
+  <% if (message !=''){ %>
+  	<h1>Hello User </h1>
+  <% }  %>
+  <p>Please put in your completion code if you have any:</p>
+  <form action="/code_new" method="POST">
+  <div class = "container">
+	<label for="continuing_code">Continuing Code:</label><br>
+	<input type="text" id="continuing_code" name="continuing_code"><br><br>
+  </div>
+  <div class="container" style="background-color:#f1f1f1">	
+	<input type="submit" value="Submit" id ="button1">
+  </div>
+
+  <form action="/instructions" method="GET">
+  <div class="container" style="background-color:#f1f1f1">	
+	<input type="submit" value="Don't have a continuing code" id ="button2">
+  </div>
+  </form>	
+  </form>
+
+  
+  </div>
+ </body>
+</html>

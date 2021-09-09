@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Page-1 Study</title>
+    <link rel="stylesheet" href="first_page_try2.css">
+  </head>
+  <body>
+
+	  <div class = "contain">
+	  <p>
+		<% if (message !=''){ %>
+			<h1><%= message %> </h1>
+		<% }  %>
+	  </p>
+	 <div class = "instructions"> 
+		 
+	  <ul id = "first_ol"> 
+		<h3 align= "center">Please read the instructions carefully.</h3>
+	    </br>
+	  </br>
+	  For each audio file presented:
+		<li>Listen to the audio recording. Click on ▶ to play the audio recording.</li>
+		<li>Click all the words that you think that are <b>emphasized</b> in the audio recording.</li>
+		<li>When you are done, click the <b>Next</b> button to move on to the next page. Scroll all the way to the right of the checkboxes to find the <b>Next</b> button.</li>
+
+	  </ul>
+
+
+	 </div>
+	  </div>
+	</br>
+	</br>
+	<div id = 'display_audio'>
+
+	</div>
+
+ <form action="/completion_page" method="GET">
+
+<div class="container" style="background-color:#f1f1f1">
+   <input style="display:none" type="submit" value="Submit" id ="submit_page1">
+   </br>
+   </br>
+   </br>
+</div>
+</form>
+</section>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+
+
+    function getSelectedCheckboxValues(name) {
+
+            //localStorage.setItem("init", temp);
+            const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+            let values = [];
+            checkboxes.forEach((checkbox) => {
+                values.push(checkbox.value);
+                console.log('this'+checkboxes);
+            });
+            return values;
+        }
+
+    <% var direc = directory_name_var %>;
+    let directory_name_var = <%- JSON.stringify(direc) %>;
+    <% var fil = file_names_var %>;
+    let file_names_var = <%- JSON.stringify(fil) %>;
+    <% var text_in = info %>;
+    let texts_info = <%- JSON.stringify(text_in) %>;
+    <% var user_id = user_id %>;
+    let user_unique = <%- JSON.stringify(user_id) %>;
+    <% var st_id = study_id %>;
+    let study_id = <%- JSON.stringify(study_id) %>;
+
+    //console.log(<%- file_names_var[0] %>);
+    if (localStorage.getItem(user_unique+"init") === null) {
+         var init = 0
+         localStorage.setItem(user_unique+"init", 0);
+
+         var emphasis_tags = {}
+         localStorage.setItem(user_unique+'emphasis_audio', JSON.stringify(emphasis_tags));
+
+    }
+    else{
+        var init = JSON.parse(localStorage.getItem(user_unique+"init"));
+    }
+
+
+    document.getElementById("submit_page1").disabled = true;
+
+
+function recurs_but(init){
+
+    var words = texts_info[init].split(' ');
+    var html = " <div align='center'><audio controls> <source src='audios/"+ file_names_var[init]+ "' type='audio/mpeg'></audio></div><br>";
+    //html+= "<h3>Text of the above audio: <h3>";
+    html+= "<div align='center'> <p><b>Transcript: </b><i><span class='notbold'>"+texts_info[init]+"</span></i></p> </div></br>"; //<embed id='embed' src='"+"all_texts/"+file_names_var[init].replace('.mp3', '.txt')+"'> ";
+    html+= "<div align='center'><h3> </h3></div>";
+    html += "<div class='search-table-outter wrapper'><table>";
+    row1 = "<tr>";
+    row2 = "<tr>";
+
+    for(let i =0;i<words.length;i++){
+        if(words[i].length != 0 ){
+            //console.log(words[i]);
+            row1 += "<th>"+words[i]+"</th>";
+            row2 += "<td >"+"<input type='checkbox' id='"+words[i]+String(i)+"' name='"+String(init)+"' value='"+words[i]+"'> "+"</td>";
+            //html += "<label for='"+words[i]+String(i)+"'>"+words[i]+"</label><br>";
+        }
+    }
+
+    row1+= "</tr>";
+    row2 += "</tr>";
+    html+= row1;
+    html+= row2;
+    //console.log(row2);
+    html += "</div></table>"
+    html+= "<button id='btn"+String(init)+"'>"+"Next "+"</button>";
+    //console.log(html);
+    document.getElementById('display_audio').innerHTML = html; //"<h3>Click on play to listen to the Audio File below: </h3>";
+
+    const btn = document.querySelector('#btn'+String(init));
+            btn.addEventListener('click', (event) => {
+                var checked  = new Set(getSelectedCheckboxValues(String(init)));
+
+                var new_text = '';
+                for(let k=0;k<words.length;k++){
+                    if(checked.has(words[k])){
+                    new_text += "<style=emphasized_word>"+words[k]+"</style=emphasized_word>"+ " ";
+                    }
+                    else{
+                    new_text += words[k]+" "
+                    }
+                }
+                ////
+
+                var init = JSON.parse(localStorage.getItem(user_unique+"init"));
+                init = init + 1;
+                localStorage.setItem(user_unique+"init", init.toString());
+
+                var retrievedObject = JSON.parse(localStorage.getItem(user_unique+'emphasis_audio'));
+                //console.log(retrievedObject);
+                retrievedObject[file_names_var[init]] = new_text;
+                alert(new_text);
+                localStorage.setItem(user_unique+'emphasis_audio', JSON.stringify(retrievedObject));
+                //alert(retrievedObject);
+
+
+
+                //if(init<file_names_var.length){
+                if(init<file_names_var.length){
+                    recurs_but(init);
+                }
+                else{
+                    document.getElementById("btn"+String(init-1)).disabled = true;
+                    document.getElementById("btn"+String(init-1)).hidden = true;
+
+                    var retrievedObject = localStorage.getItem(user_unique+'emphasis_audio');
+                    //console.log(retrievedObject)
+
+
+                     let url = '/first_page_study';
+                     let data = {
+                       username: 'Sammy',
+                       password: 'sdfsdf',
+                       email: 'skudfb',
+
+                     }
+
+                     var xhr = new XMLHttpRequest();
+                     xhr.open('POST', url);
+                     xhr.setRequestHeader('Content-Type', 'application/json');
+                     xhr.onload = function() {
+                       console.log(xhr.responseText);
+                     };
+                     xhr.send(JSON.stringify(JSON.parse(retrievedObject)));
+
+                    console.log('last recording');
+
+                       // disable next
+                    document.getElementById("submit_page1").disabled = false;
+                    document.getElementById("submit_page1").hidden = false;
+                    document.getElementById("submit_page1").style.background = "#0088cc";
+                    document.getElementById("submit_page1").style.color = "white";
+                }
+
+            });
+}
+    recurs_but(init);
+
+
+    </script>
+
+  </body>
+</html>
+
+
