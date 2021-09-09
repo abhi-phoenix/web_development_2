@@ -1,0 +1,31 @@
+body {
+    background-color: white;
+  }
+  
+  h1 {
+    color:#0088cc;
+    text-align: center;
+    font-family: Arial;
+  }
+  
+  #outer_div{
+      text-align: center;
+      display: table;
+      width : 100%;
+  }
+  
+  
+  #para1 {
+    text-align: center;
+    font-family: Arial;
+    font-size: 20px;
+    /* border-style:  solid;
+    border-color: 0088cc;
+    border-width: medium; */
+    border: 1px solid black;
+    margin: 50px 100px;
+    padding: 5px;
+  
+  }
+  
+ 

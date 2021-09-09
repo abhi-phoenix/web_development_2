@@ -1,0 +1,49 @@
+form {
+	width:60%;
+	text-align: center;
+	vertical-align: middle;
+  border: 3px solid #f1f1f1;
+  display: inline-block;
+}
+
+#outer_div{
+	text-align: center;
+	display: table;
+	width : 100%;
+}
+
+h1 {
+  font-family: Arial;
+  text-align: center;
+  padding-top: 20px;
+}
+
+
+#para1 {
+	text-align: center;
+  font-family: Arial;
+  /* font-size: 20px; */
+  width:100%;
+  /* border-style:  solid;
+  border-width: medium; */
+  border: 1px solid black;
+  margin: 20px 0px;
+  
+
+}
+
+#button1{
+	background-color: #4CAF50;
+  color: white;
+  font-size: 20px;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  align-content: center;
+}
+
+#button1:hover {
+  opacity: 0.8;
+}

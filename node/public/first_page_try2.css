@@ -1,0 +1,249 @@
+* {
+  margin: 0;
+  padding: 0;
+  /* box-sizing: border-box; */
+}
+
+html, body {
+  margin:0;
+  padding: 0;
+  font-size: 20px;
+}
+
+body {
+  font-family:Arial;
+  font-size: 0.8rem;
+}
+
+.wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  /* align-items: center; */
+}
+
+.contain{
+  text-align: center;
+}
+.instructions{
+
+  text-align: center;
+  font-size: 45px;
+}
+
+
+#first_ol{
+  display: inline-block;
+  text-align: left;
+  padding: 10px;
+  font-size: 19px;
+  border: 1px solid black;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+li{
+  margin-left: 30px;
+}
+
+.search-table-outter {}
+table{table-layout: fixed; margin:0px auto 0px auto; }
+table, td, th{border-collapse:collapse; border:1px solid #777;}
+th{padding:20px 7px; font-size:15px; color:#444; background:#66C2E0;}
+td{padding:5px 10px; height:35px;}
+
+.search-table-outter { overflow-x: scroll; }
+th, td { min-width: 60px; text-align: center; }
+
+
+/*
+table{
+  width: 100%;
+  table-layout: fixed;
+  border: 1px solid black;
+  padding: 20px;
+}
+
+th,td{
+  text-align: center;
+  overflow: scroll;
+  padding: 3px;
+  min-width: 300px;
+
+}
+*/
+
+h1, h2 {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: normal;
+  padding: 0.5rem 0 0 0;
+}
+.col0{
+  width: 6%;
+}
+.col1{
+  width: 61%;
+}
+
+.col2{
+  width: 8%;
+}
+
+.col3{
+  width: 7%;
+}
+
+.col4{
+  width: 18%;
+}
+
+.record_instr{
+  display: inline-block;
+  float: left;
+}
+
+.review_instr{
+  display: inline-block;
+  float: right;
+}
+
+.main-controls {
+  padding: 0.5rem 0;
+}
+
+.container{
+  text-align: center;
+  padding: 0.5rem;
+}
+
+canvas {
+
+  width: 100%;
+  height: 60px;
+  display: block;
+  text-align: center;
+  margin-bottom: 0.2em;
+}
+
+#buttons {
+  display: flex;
+  /*flex-direction: row;
+  justify-content: space-between;*/
+}
+
+#buttons button {
+  font-size: 1rem;
+  padding: 1rem;
+
+}
+
+button {
+  font-size: 1rem;
+  background: #0088cc;
+  text-align: center;
+  color: white;
+  border: none;
+  transition: all 0.2s;
+  padding: 0.5rem;
+}
+
+button:hover, button:focus {
+  box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 1);
+  background: #0ae;
+}
+
+button:active {
+  box-shadow: inset 0px 0px 20px rgba(0,0,0,0.5);
+  transform: translateY(2px);
+}
+
+
+/* Make the clips use as much space as possible, and
+ * also show a scrollbar when there are too many clips to show
+ * in the available space */
+.sound-clips {
+  flex: 1;
+  overflow: auto;
+}
+
+.submit_form{
+  display: inline;
+  font-size: 1 rem;
+}
+section, article {
+  display: inline;
+}
+
+.clip {
+  padding-bottom: 1rem;
+}
+
+audio {
+  width: 200px;
+  display: inline;
+  margin: 1rem auto 0.5rem;
+}
+
+
+.clip button {
+  font-size: 1rem;
+  /* display: inline; */
+  float: right;
+}
+
+button.delete {
+  background: #f00;
+
+  margin-top: 20px;
+}
+
+button.submit {
+  background: #0088cc;
+  margin-top: 20px;
+
+}
+
+#submit_page1{
+  /* background:#C0C0C0; */
+  padding: 0.5rem 0.5rem;
+  font-size: 0.8rem;
+  border: none;
+  background: none;
+}
+
+.brlarge {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+
+input.largerCheckbox {
+            width: 25px;
+            height: 25px;
+}
+
+
+
+/* Checkbox hack to control information box display */
+
+label {
+  font-size: 3rem;
+  position: absolute;
+  top: 2px;
+  right: 3px;
+  z-index: 5;
+  cursor: pointer;
+  background-color: black;
+  /* border-radius: 10px; */
+}
+
+/* Adjustments for wider screens */
+@media all and (min-width: 800px) {
+  /* Don't take all the space as readability is lost when line length
+     goes past a certain size */
+  .wrapper {
+    width: 90%;
+    /* max-width: 1000px; */
+    margin: 0 auto;
+  }
+}
